@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <title>threejsTest</title>
+
+</head>
+<body>
+    <div id="container">Generating world...</div>
+    <script src="./three.js"></script>
+    <script>
+        // レンダラが描画したものを表示するコンテナ
+        var container;
+
+        // three.js のカメラ・シーン・レンダラを使用する
+        var camera, scene, renderer;
+
+        var count = 0;
+
+        // init して animate でループする
+        init();
+        animate();
+
+        function init() {
+
+            // カメラを設定
+            camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 20000);
+            camera.position.set(500, 500, 0);
+            camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+            // オブジェクトを管理するシーン
+            scene = new THREE.Scene();
+
+            // オブジェクト初期化
+            // グリッド表示
+            var grid = new THREE.GridHelper(1000, 50);
+            grid.setColors(0xffffff, 0xaacc00);
+            scene.add(grid);
+
+            // 描画更新を管理するレンダラの初期化
+            // WebGLを使用する
+            renderer = new THREE.WebGLRenderer();
+
+            // 描画する色・比率・サイズの初期化
+            renderer.setClearColor(0x000000);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+            // div の container を拾ってくる
+            container = document.getElementById('container');
+
+            // container の要素を初期化
+            container.innerHTML = "";
+
+            // container で renderer の描画を映す
+            container.appendChild(renderer.domElement);
+
+        }
+
+        function animate() {
+
+            // 再描画の準備が整い次第実行される
+            requestAnimationFrame(animate);
+
+            // 描画
+            render();
+
+            // count を degree から radian に変換する
+            var theta = count * Math.PI / 180.0;
+
+            // camera をy軸周りに回転させる
+            camera.position.set(500 * Math.cos(theta), 500, 500 * Math.sin(theta))
+
+            // camera の視点は固定する
+            camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+            // 1フレームずつカウントする
+            ++count;
+
+        }
+
+        function render() {
+
+            // シーン・カメラ情報を基にして2Dに描画
+            renderer.render(scene, camera);
+
+        }
+    </script>
+</body>
+</html>
