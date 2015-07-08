@@ -38,7 +38,7 @@ from pyschool.cmdline import parse_args
 
 >import文では、指定した名前のPythonスクリプトやモジュール/パッケージを調べて、存在しない場合には例外(ImportError)を出し、存在する場合にはそのコードを実行する(中の変数や関数が読み込まれて利用可能となる)。
 
-なるほど。コードを実行するらしい。どこにあるのかは知らんけど。(pythonフォルダのLibにある)
+なるほど。コードを実行するらしい。どこにあるのかは知らんけど。(pythonフォルダのLibにあるらしい)
 
 > 基本
 
@@ -211,6 +211,20 @@ Base = declarative_base()
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 ```
+
+この場合は sqlalchemy フォルダにある orm を見れば sessionmaker があって、sqlalchemyの ext にある declarative という部分を見れば、 declarative_base の内容がわかるらしい。
+
+```python
+from sqlalchemy.ext import declarative
+```
+
+という風に `import` をして、
+
+```python
+Base = declarative.base()
+```
+
+とした方がすっきりすると思うのだけどどうなんだろう。
 
 ## クラス StockPrice
 
