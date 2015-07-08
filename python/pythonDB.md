@@ -214,18 +214,6 @@ from sqlalchemy.ext.declarative import declarative_base
 
 この場合は sqlalchemy フォルダにある orm を見れば sessionmaker があって、sqlalchemyの ext にある declarative という部分を見れば、 declarative_base の内容がわかるらしい。
 
-```python
-from sqlalchemy.ext import declarative
-```
-
-という風に `import` をして、
-
-```python
-Base = declarative.base()
-```
-
-とした方がすっきりすると思うのだけどどうなんだろう。
-
 ## クラス StockPrice
 
 ```python
