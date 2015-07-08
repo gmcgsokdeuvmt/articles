@@ -2,7 +2,13 @@
 
 python わかんないし、データベースわかんないし、とりあえず検索して勉強しよう。
 
-参考にさせてもらったサイト
+私の python のバージョンはこんな感じ
+
+```
+Python 2.7.9
+```
+
+参考にさせてもらったサイトはこちら。
 
 * [O/R マッパー経由でデータベースを使う](https://skitazaki.github.io/python-school-ja/csv/csv-6.html)
 
@@ -69,7 +75,56 @@ hoge()
 
 みたいな感じ。
 
+
 **import文を確認してfrom下で動作確認**
+
+
+### ちなみに
+
+>* importではワイルドカードとかも使える
+* import ~ as とかも書いてあるとよいかも
+
+と話を受けたのでちょっと調べもの。
+
+「python import ワイルドカード」検索
+
+参考サイト
+
+* [モジュール(2)](https://python.g.hatena.ne.jp/muscovyduck/?of=40)
+
+```python
+>>> from fibo import *
+>>> fib(500)
+1 1 2 3 5 8 13 21 34 55 89 144 233 377
+>>>
+```
+
+> ワイルドカード(*)は、基本的には全ての名前をimportするけど、アンダースコア(_)で始まる名前のものはimportしないよ。
+
+という話。
+
+でも、これを使うと「何の変数を使う」とか「何の関数を使う」とかが良く分からない。
+
+ワイルドカード使わない方がコードが読みやすいかなあ…と思う限りです。
+
+「python import as」検索
+
+参考サイト
+
+* [Pythonのモジュールインポートのしくみ](http://python.matrix.jp/pages/tips/import.html)
+
+>「as」は別名を名づけするためのもので、以下のような使われ方です。
+
+```
+import A.B as C
+from D.E.F import G.H.I as J
+```
+
+>こうすると、複雑なパッケージに含まれるオブジェクトにシンプルな名前でアクセスできます。
+
+>別名をつけるのは混乱を招きやすいので 互換モジュールを指定する時などを除き やたらと使うのはやめたほうがいいと思います。
+
+`as` で別名を付けることができるらしい。適度に使えば読みやすくできそう。
 
 ## スネークキャメルの変数…？
 
@@ -89,7 +144,7 @@ DEFAULT_SQLITE_FILE = ':memory:'
 
 pep8? ああ、なるほど。
 
-「pep8」
+「pep8」検索
 
 * [pep8](https://github.com/mumumu/pep8-ja/blob/master/index.rst)
 
@@ -127,6 +182,8 @@ hoge = []
 
 …だった気がする。
 
+list と dict は違うので注意されたし。
+
 連想配列は 
 
 ```
@@ -135,6 +192,12 @@ hoge = []
 
 という形式で。
 
+「python 配列 連想配列」検索
+
+参考サイト
+
+* [文字列・配列・連想配列](http://d.hatena.ne.jp/uyamae/20071023/1193264069)
+
 ## 知らない関数 sessionmaker()
 
 ```python
@@ -142,7 +205,7 @@ Session = sessionmaker()
 Base = declarative_base()
 ```
 
-```import``` にあった。以上。実装は必要なとき見る。 python の Lib 下を見る。
+```import``` にあった。以上。実装は必要なときに、 python の Lib 下にあるモジュールを見る。
 
 ```python
 from sqlalchemy.orm import sessionmaker
@@ -173,6 +236,8 @@ class StockPrice(Base):
 if文とかfor文とかのスコープは、**コロン**と**インデント**だよね。それはわかる。
 
 「class python」検索
+
+参考サイト
 
 * [Python入門 - クラス](http://www.tohoho-web.com/python/class.html)
 
@@ -239,7 +304,7 @@ from sqlalchemy import Column, Integer, Float, String, Date
 
 * [Data model](https://docs.python.org/2/reference/datamodel.html#specialnames)
 
-色々出てきた。
+参考サイトが色々出てきた。
 
 **Data model** の方で「\__repr__」で検索。
 
@@ -258,6 +323,8 @@ from sqlalchemy import Column, Integer, Float, String, Date
 
 「python string format」検索
 
+参考サイト
+
 * [[python]文字列フォーマットまとめ(format関数, %dなど)](http://dackdive.hateblo.jp/entry/2014/11/15/001318)
 
 >基本形
@@ -273,6 +340,8 @@ from sqlalchemy import Column, Integer, Float, String, Date
 
 
 「python ダブルクォーテーション シングルクォーテーション」検索
+
+参考サイト
 
 * [エスケープシーケンス](http://www.python-izm.com/contents/basis/escape_sequence.shtml)
 
@@ -330,6 +399,8 @@ def process(args):
 
 「python ダブルクォーテーション 3つ」検索
 
+参考サイト
+
 * [http://d.hatena.ne.jp/SumiTomohiko/20070606/1181161100](http://d.hatena.ne.jp/SumiTomohiko/20070606/1181161100)
 
 >文字列リテラルには、ダブルクォーテーションひとつ (") でくくるものと、ダブルクォーテーション3つ (""") でくくるものの2種類があります。ダブルクォーテーション3つでくくると、複数行に渡る文字列を記述することができます。
@@ -363,6 +434,8 @@ def process(args):
 
 「dsl sql」検索
 
+参考サイト
+
 * [DSLについて考える](http://kozy4324.github.io/blog/2012/09/18/thinking-about-dsl/)
 
 なるほど、狭い範囲で特化した言語…と。
@@ -391,6 +464,8 @@ C\#だったらアップキャストしたりとかあったはず…
 まあ、 ```fp``` の中身は多分 ```open(args.filename[0])```
 
 「with as python」検索
+
+参考サイト
 
 * [Pythonのwithステートメントのまとめ](http://shin.hateblo.jp/entry/2013/03/23/211750)
 
@@ -444,6 +519,8 @@ for i, f in enumerate(FIELDS):
 
 「enumerate python」検索
 
+参考サイト
+
 * [forループで便利な zip, enumerate関数](http://python.civic-apps.com/zip-enumerate/)
 
 >enumerate関数 インデックスとともにループ
@@ -471,6 +548,8 @@ for i, f in enumerate(FIELDS):
 データを `StockPrice` としてラップしてる感じですかね。気になるのは `**dt`
 
 「python ** 引数」検索
+
+参考サイト
 
 * [[Python] 可変長引数あれこれ](http://blog.taikomatsu.com/2009/03/13/python-%E5%8F%AF%E5%A4%89%E9%95%B7%E5%BC%95%E6%95%B0%E3%81%82%E3%82%8C%E3%81%93%E3%82%8C/)
 
@@ -523,6 +602,8 @@ if __name__ == '__main__':
 
 「if __name__ == '__main__':」検索
 
+参考サイト
+
 * [if __name__ == '__main__': について](http://d.hatena.ne.jp/s-n-k/20080512/1210611374)
 
 この辺抜粋
@@ -557,6 +638,8 @@ import でも実行される  __name__ = __main__
 __name__が変わるというお話。なるほどね。
 
 「python pass文」検索
+
+参考サイト
 
 * [Python には何もしない文 pass がある](http://d.hatena.ne.jp/r_ikeda/20110517/pass)
 
@@ -642,6 +725,10 @@ def parse_args():
 `csv-6.sqlite` ができた。
 
 確かめよう
+
+「python sqlite」検索
+
+参考サイト
 
 * [Pythonのsqlite3ライブラリでデータベースを操作しよう](http://msrx9.bitbucket.org/blog/html/2013/07/04/db_study.html)
 
