@@ -726,7 +726,7 @@ def parse_args():
 
 `csv-6.sqlite` ができた。
 
-確かめよう
+## 中身を確認してみよう
 
 「python sqlite」検索
 
@@ -736,6 +736,93 @@ def parse_args():
 
 直接クエリ文を発行する感じ。
 
-カーソルをどうこうしてfor回したら取れた。いけた。これはデータベースだ。
+これを参考にデータベースにアクセスしてみる。
+
+>データベースへの接続とカーソル
+
+```python
+# データベースへ接続
+>>> conn = sqlite3.connect('./sqlite.db')
+
+# カーソルの作成
+>>> cur = conn.cursor()
+```
+
+>まずは、 ./sqlite.db データベースへ接続をします。 データベースが存在しない場合は新規作成をしてから接続、存在している場合にはそのまま接続をします。 次に、カーソルの作成をすればデータベースを操作する準備は完了です。
+
+
+>初めてカーソルという単語を見た時に一体何のためのものなのかが理解できませんでした。 全然違っているのかもしれませんが、調べてみた感じでは以下の様な意味で良いのかなと…
+
+>* コネクションオブジェクト  
+データベース自体を制御するためのオブジェクト
+
+>* カーソルオブジェクト  
+データベース内のデータを制御するためのオブジェクト（データベースへ接続していないと作成できない）
+
+このへんの処理をして `csv-6.sqlite` にコネクションを作って、制御用にカーソルを作ってあげると、クエリ文でいじくることができる。
+
+あとは `cur.execute("""クエリ文""")` という風にすれば、データベースを直接いじれるわけですね。
+
+### 中身の表示
+
+> SELECT文を用いてデータの抽出、Pythonを使って結果の出力
+
+> 実際にPython上でテーブルの内容を表示してみます。
+
+```python
+>>>
+# テーブルの内容を表示
+>>> cur.execute("""SELECT name, price FROM shop;""")
+>>> for name, price in cur.fetchall():
+...     print u"%sは、%s円です。" % (name, price)
+...
+りんごは、99円です。
+```
+
+サンプル通りにやれば、おおよそ大丈夫だ。今回作ったテーブルの定義を再掲します。
+
+例と比較すると、`shop` が `stock_price`(table_name)で、`name` や `price` が `id` `day` `price_begin`...にあたる。
+
+```python
+class StockPrice(Base):
+
+    __tablename__ = 'stock_price'
+
+    id = Column(Integer, primary_key=True)
+    day = Column(Date, nullable=False, unique=True)
+    price_begin = Column(Float, nullable=False)
+    price_max = Column(Float, nullable=False)
+    price_min = Column(Float, nullable=False)
+    price_end = Column(Float, nullable=False)
+
+    def __repr__(self):
+        return "<StockPrice('{}')>".format(self.day)
+
+    def diff(self):
+        return self.price_end - self.price_begin
+```
+
+
+表示してある程度遊んだら、
+
+>COMMITを忘れずに
+
+```python
+>>> conn.commit()
+```
+
+>今日は店じまいです。ちゃんと今日の作業の結果を保存してあげましょう。 データベースへの変更を保存するには COMMIT をする必要があります。
+
+>COMMITを実行するには最初に作成したコネクトオブジェクトである conn の commit() メソッドを実行すればよいです。
+
+>後片付け
+
+```python
+>>> conn.close()
+```
+
+>接続したのならちゃんと切断しましょう。 切断が完了したらデータベースの作業は終了となります。
+
+この辺の処理を忘れずに…とのこと。
 
 **データの格納終わり！！**
