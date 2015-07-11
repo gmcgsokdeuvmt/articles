@@ -12,6 +12,31 @@ Python 2.7.9
 
 * [O/R マッパー経由でデータベースを使う](https://skitazaki.github.io/python-school-ja/csv/csv-6.html)
 
+## 何のための記事？
+
+この文章の主旨は、
+
+* python のコードを読もうとしてつっかかるところのメモ
+* python でデータベースを扱うためのとっかかりを掴む
+
+といったところにあります。
+
+これを延長して、
+
+* 新しく別の言語で何かをやってみたい
+
+といったことを考えている人にも（方法論的な意味で）少しは参考になるかなと思います。
+
+全くのプログラミング初心者は、何か触れる言語を作ってからの方がいいと思います。
+
+できるだけ勘違いを起こすような記述を避け、参考サイトを上げていく構成になっていますが、参考サイトが間違っている可能性もなくはないので、慎重に見てください。
+
+python は分かってるからデータベースを扱う SQLAlchemy だけかいつまんで読みたいって人はこの辺に飛ぶといいと思います。
+
+* [クラス StockPrice](#StockPrice)
+* [SQLAlchemy の起動](#SQLAlchemy)
+* [このプログラム is 何](#howto)
+
 ## import 文って何
 
 ### これ
@@ -198,7 +223,7 @@ list と dict は違うので注意されたし。
 
 * [文字列・配列・連想配列](http://d.hatena.ne.jp/uyamae/20071023/1193264069)
 
-## 知らない関数 sessionmaker()
+## 知らない関数・変数は import 文を確認
 
 ```python
 Session = sessionmaker()
@@ -214,6 +239,7 @@ from sqlalchemy.ext.declarative import declarative_base
 
 この場合は sqlalchemy フォルダにある orm を見れば sessionmaker があって、sqlalchemyの ext にある declarative という部分を見れば、 declarative_base の内容がわかるらしい。
 
+<a name = "StockPrice"></a>
 ## クラス StockPrice
 
 ```python
@@ -348,8 +374,8 @@ from sqlalchemy import Column, Integer, Float, String, Date
 * [エスケープシーケンス](http://www.python-izm.com/contents/basis/escape_sequence.shtml)
 
 ```python
-# -*- coding: utf-8 -*-
-if __name__ == "__main__":
+# -\*- coding: utf-8 -*-
+if \__name__ == "\__main__":
     print '1234¥'567890'
     print "1234'567890"
 ```
@@ -382,13 +408,13 @@ return "<StockPrice('"+self.day+')>".format(self.day)
 
 何て名前だったか。
 
-## 飛ばすぜー
+## その他
 
 ```python
 def process(args):
 ```
 
-引数付きの関数定義
+これは、引数付きの関数定義
 
 ```python
     """Parse daily Tokyo stock prices, and calculate up/down.
@@ -396,7 +422,7 @@ def process(args):
     """
 ```
 
-コメント
+これは、コメント
 
 
 「python ダブルクォーテーション 3つ」検索
@@ -420,8 +446,9 @@ def process(args):
 	baz
 ```
 
-まあ、こんな使い方もあるということで。
+まあ、文字列としてはこんな使い方もできるということで。
 
+<a name = "SQLAlchemy"></a>
 ## SQLAlchemy の起動
 
 ### dslとは
@@ -604,9 +631,9 @@ if __name__ == '__main__':
 
 実際に実行するところについて…。
 
-`pass` `test` __name__ == __main__ については後で調べましょう。
+`pass` `test` \__name__ == \__main__ については後で調べましょう。
 
-「if __name__ == '__main__':」検索
+「if \__name__ == '\__main__':」検索
 
 参考サイト
 
@@ -641,7 +668,7 @@ import でも実行される  __name__ = __main__
  >>>
 ```
 
-__name__が変わるというお話。なるほどね。
+\__name__が変わるというお話。なるほどね。
 
 「python pass文」検索
 
@@ -657,6 +684,7 @@ __name__が変わるというお話。なるほどね。
 
 んで…
 
+<a name = "howto"></a>
 # このプログラム is 何
 
 ## 株価csv とってこような
