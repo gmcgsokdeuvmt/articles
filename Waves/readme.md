@@ -27,7 +27,7 @@
 
 # お借りした素材
 
-BGM: Light Latt (Robson Cozendey - [www.cozendey.com](www.cozendey.com))
+BGM: Light Latt (Robson Cozendey - [www.cozendey.com](http://www.cozendey.com))
 
 背景: [3 Skyboxes](https://www.assetstore.unity3d.com/jp/#!/content/25142) 
 
