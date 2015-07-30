@@ -1,4 +1,4 @@
-# Waves
+# Waves (Tofu Flight)
 
 今回作ったゲームは、**「Waves」**波に乗るゲームです。
 
