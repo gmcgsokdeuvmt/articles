@@ -1,0 +1,9 @@
+C:\temp\sandbox\gamejam4\gamejam4\bin\Debug\gamejam4.exe.config
+C:\temp\sandbox\gamejam4\gamejam4\bin\Debug\Altseed.dll
+C:\temp\sandbox\gamejam4\gamejam4\bin\Debug\Altseed_core.dll
+C:\temp\sandbox\gamejam4\gamejam4\bin\Debug\gamejam4.exe
+C:\temp\sandbox\gamejam4\gamejam4\bin\Debug\gamejam4.pdb
+C:\temp\sandbox\gamejam4\gamejam4\bin\Debug\Altseed.xml
+C:\temp\sandbox\gamejam4\gamejam4\obj\Debug\gamejam4.csprojResolveAssemblyReference.cache
+C:\temp\sandbox\gamejam4\gamejam4\obj\Debug\gamejam4.exe
+C:\temp\sandbox\gamejam4\gamejam4\obj\Debug\gamejam4.pdb
